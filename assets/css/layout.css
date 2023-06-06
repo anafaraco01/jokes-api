@@ -1,0 +1,82 @@
+.container{
+    display: grid;
+    grid-template-rows: 50vh 50vh;
+    grid-template-columns: 100vh;
+}
+
+.item1{
+    grid-row: 1fr / 2fr;
+    grid-column: 1 / 100;
+    background-color: #dbc60d;
+}
+
+.item2{
+    grid-row: 2fr / 7fr;
+    grid-column: 1 / 100;
+    margin-top: 50px;
+}
+
+.item3{
+    background-color: aliceblue;
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    box-shadow: 0 0 10px 0 rgba(222, 182, 0, 0.814);
+    width: 50%;
+}
+
+#search-input{
+    width: 88%;
+}
+
+h1, h2{
+    font-family: 'Century Gothic', Courier, monospace;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+ h1{
+    font-size: 7rem;
+ }
+
+ h2{
+    font-size: 10rem;
+ }
+
+ .meme-img{
+    height: 100%;
+    margin-left: 20vh;
+    float: left;
+ }
+
+ .instructions{
+    font-size: 2rem;
+    margin-top: 70px;
+    text-align: center;
+    background-color: royalblue;
+    color: black;
+ }
+
+ .joke-div, .joke-not-found{
+    font-size: 25px;
+    margin-bottom: 12px;
+    padding: 5px;
+    border-radius: 5px;
+ }
+
+ .joke-div{
+    background-color: #84c2c3;
+    box-shadow: 0 0 10px 0 #29888a;
+}
+
+ .joke-not-found{
+    background-color: #a22d2d;
+    box-shadow: 0 0 10px 0 #c8bbbb;
+    color: #b6b6b6;
+    text-align: center;
+    margin-top: 80px;
+ }
