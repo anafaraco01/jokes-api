@@ -1,3 +1,4 @@
+// Loads the intructions and the meme on the page load
 window.addEventListener('load', function() {
   const instructions = document.getElementById('jokes-container');
   const img = document.createElement('img');
@@ -10,31 +11,22 @@ window.addEventListener('load', function() {
   instructions.appendChild(div);
 });
 
+// Handles the search form submission
 document.getElementById('search-form').addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevent form submission
+  event.preventDefault(); 
+  const input = document.getElementById('search-input').value;
 
-  // Retrieve the search query from the input field
-  const searchQuery = document.getElementById('search-input').value;
-
-  if (!searchQuery) {
+  if (!input) {
     return;
+  } else {
+    fetchJokes(input);
   }
-
-  const trial = document.getElementById('jokes-container');
-  trial.innerHTML = null;
-
-  // Call the search function with the search query
-  fetchJokes(searchQuery)
 });
 
+// Fetches the jokes from the API
 async function fetchJokes(input) {
-  let term = input;
-
-  if(term === '[object Event]') {
-    term = 'dad';
-  }
-
-  const url = `https://icanhazdadjoke.com/search?limit=30&term=${term}`;
+  let termValue = input;
+  const url = `https://icanhazdadjoke.com/search?limit=30&term=${termValue}`;
 
   try {
     const response = await fetch(url, {
@@ -48,23 +40,39 @@ async function fetchJokes(input) {
     }
 
     const data = await response.json();
-    const jokesContainer = document.getElementById('jokes-container');
-    jokesContainer.innerHTML = null;
 
-    if(data.results.length === 0) {
-      const div = document.createElement('div');
-      div.className = 'joke-not-found';
-      div.innerHTML = 'We are sorry, we could not find any joke containing the word you searched for. Please try another word, or maybe the singular version of the word. Have a nice day, and remember to laugh! :)))';
-      jokesContainer.appendChild(div);
-    } else {
-      data.results.forEach((joke) => {
-        const div = document.createElement('div');
-        div.className = 'joke-div';
-        div.textContent = joke.joke;
-        jokesContainer.appendChild(div);
-      });
-    }
+    checkAPIResponse(data.results);
   } catch (error) {
     throw error;
   }
+}
+
+// Checks if the API response is not empty and clears the jokes container
+function checkAPIResponse(results) {
+    const jokesContainer = document.getElementById('jokes-container');
+    jokesContainer.innerHTML = null;
+
+    if(results.length === 0) {
+      displayError(jokesContainer);
+    } else {
+      displayJokes(results, jokesContainer)
+    }
+}
+
+// Displays the jokes from the API that contain the user input
+function displayJokes(results, jokesContainer){
+  results.forEach((result) => {
+    const div = document.createElement('div');
+    div.className = 'joke-div';
+    div.textContent = result.joke;
+    jokesContainer.appendChild(div);
+  });
+}
+
+// Displays the error message when no jokes are found
+function displayError(jokesContainer) {
+  const div = document.createElement('div');
+  div.className = 'joke-not-found';
+  div.innerHTML = 'We are sorry, we could not find any joke containing the word you searched for. Please try another word, or maybe the singular version of the word. Have a nice day, and remember to laugh! :)))';
+  jokesContainer.appendChild(div);
 }

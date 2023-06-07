@@ -1,3 +1,6 @@
+/* Style of the website */
+
+/* Creates the grid */
 .container{
     display: grid;
     grid-template-rows: 50vh 50vh;
@@ -16,6 +19,7 @@
     margin-top: 50px;
 }
 
+/* Styles the search bar */
 .item3{
     background-color: aliceblue;
     padding: 10px;
@@ -32,6 +36,7 @@
     width: 88%;
 }
 
+/* h1 and h2 are the slogan of the website */
 h1, h2{
     font-family: 'Century Gothic', Courier, monospace;
     text-align: center;
@@ -47,12 +52,14 @@ h1, h2{
     font-size: 10rem;
  }
 
+/* Styles the meme */
  .meme-img{
     height: 100%;
     margin-left: 20vh;
     float: left;
  }
 
+/* Styles the instructions of how to use the website when the page loads */
  .instructions{
     font-size: 2rem;
     margin-top: 70px;
@@ -61,6 +68,7 @@ h1, h2{
     color: black;
  }
 
+/* Styles the response of the api */
  .joke-div, .joke-not-found{
     font-size: 25px;
     margin-bottom: 12px;
